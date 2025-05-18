@@ -43,3 +43,4 @@ bin/
 /ffmpeg/
 /logs/
 /src/main/java/io/project/InternetRadioChecker/swing/table/notUsed/
+/.idea/

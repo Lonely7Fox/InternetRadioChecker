@@ -6,7 +6,6 @@ import io.project.InternetRadioChecker.swing.listener.panel.AppStatsUpdateTableM
 import io.project.InternetRadioChecker.swing.table.ProgressTable;
 import io.project.InternetRadioChecker.swing.table.ProgressTableModel;
 import io.project.InternetRadioChecker.swing.table.data.*;
-import io.project.InternetRadioChecker.swing.table.notUsed.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
