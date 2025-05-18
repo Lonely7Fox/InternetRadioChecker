@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <define name="log_dir" class="io.project.InternetRadioChecker.logback.LogDirProperty"/>
+    <define name="log_name" class="io.project.InternetRadioChecker.logback.LogNameProperty"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSSZ} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_dir}${file.separator}${log_name}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log_dir}${file.separator}app.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 20GB, it will delete old archived file -->
+            <totalSizeCap>1GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSSZ} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="asynclogfile" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="FILE"/>
+        <queueSize>1024</queueSize>
+        <maxFlushTime>2000</maxFlushTime>
+    </appender>
+
+    <logger name="io.project.InternetRadioChecker" level="debug" additivity="false">
+        <appender-ref ref="asynclogfile"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="net.bramp.ffmpeg.RunProcessFunction" level="info" additivity="false"></logger>
+
+    <root level="error">
+        <appender-ref ref="asynclogfile"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <root level="info">
+        <appender-ref ref="asynclogfile"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>

@@ -1,0 +1,36 @@
+plugins {
+    id("java")
+}
+
+group = "io.project"
+version = "1.0.0"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/javazoom/jlayer
+    implementation 'javazoom:jlayer:1.0.1'
+
+    // https://mvnrepository.com/artifact/io.github.thedeadone/exception-unchecker
+    implementation 'io.github.thedeadone:exception-unchecker:2.0'
+
+    // https://mvnrepository.com/artifact/net.bramp.ffmpeg/ffmpeg
+    implementation 'net.bramp.ffmpeg:ffmpeg:0.8.0'
+
+    //logging
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'commons-codec:commons-codec:1.15'
+    implementation 'ch.qos.logback:logback-core:1.4.12'
+    implementation('ch.qos.logback:logback-classic:1.4.14') {
+        exclude group: 'com.sun.mail', module: 'javax.mail'
+    }
+
+    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
